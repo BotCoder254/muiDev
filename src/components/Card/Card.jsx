@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   HeartIcon,
   ShareIcon,
   BookmarkIcon,
   EllipsisHorizontalIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
 } from '@heroicons/react/24/outline';
 
 /**
@@ -21,6 +23,7 @@ const Card = ({
   loading = false,
   className,
   onClick,
+  images = [],
   image,
   imageAlt,
   imagePosition = 'top',
@@ -33,8 +36,45 @@ const Card = ({
   aspectRatio = '16/9',
   blur = false,
   overlay = false,
+  enableImageNavigation = true,
+  imageInterval = 5000,
   ...props
 }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const processedImages = images.length > 0 
+    ? images.map(img => typeof img === 'string' ? { src: img } : img)
+    : image 
+      ? [typeof image === 'string' ? { src: image } : image]
+      : [];
+
+  const currentImage = processedImages[currentImageIndex]?.src || '';
+
+  React.useEffect(() => {
+    if (processedImages.length <= 1 || !enableImageNavigation || isHovered) return;
+
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % processedImages.length);
+    }, imageInterval);
+
+    return () => clearInterval(interval);
+  }, [processedImages.length, enableImageNavigation, imageInterval, isHovered]);
+
+  const handlePrevImage = (e) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => 
+      prev === 0 ? processedImages.length - 1 : prev - 1
+    );
+  };
+
+  const handleNextImage = (e) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => 
+      (prev + 1) % processedImages.length
+    );
+  };
+
   const baseClasses = 'rounded-xl bg-white overflow-hidden transition-all duration-200';
   
   const variants = {
@@ -97,22 +137,30 @@ const Card = ({
         ${imagePosition === 'background' ? 'absolute inset-0' : ''}
       `}
       style={{ aspectRatio }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <motion.img
-        initial={{ scale: 1.2, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        src={image}
-        alt={imageAlt}
-        className={`
-          w-full h-full object-cover
-          ${blur ? 'blur-sm scale-110' : ''}
-          ${hover ? 'group-hover:scale-110 transition-transform duration-500' : ''}
-        `}
-      />
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={currentImage}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          src={currentImage}
+          alt={processedImages[currentImageIndex]?.alt || imageAlt}
+          className={`
+            w-full h-full object-cover
+            ${blur ? 'blur-sm scale-110' : ''}
+            ${hover ? 'group-hover:scale-110 transition-transform duration-500' : ''}
+          `}
+        />
+      </AnimatePresence>
+
       {overlay && (
         <div className="absolute inset-0 bg-black/40" />
       )}
+
       {badges.length > 0 && (
         <div className="absolute top-2 left-2 flex gap-2">
           {badges.map((badge, index) => (
@@ -124,6 +172,52 @@ const Card = ({
             </span>
           ))}
         </div>
+      )}
+
+      {enableImageNavigation && processedImages.length > 1 && (
+        <>
+          <div className={`
+            absolute inset-0 flex items-center justify-between
+            opacity-0 group-hover:opacity-100 transition-opacity duration-200
+          `}>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={handlePrevImage}
+              className="ml-2 p-1 rounded-full bg-black/50 text-white hover:bg-black/70"
+            >
+              <ChevronLeftIcon className="w-5 h-5" />
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={handleNextImage}
+              className="mr-2 p-1 rounded-full bg-black/50 text-white hover:bg-black/70"
+            >
+              <ChevronRightIcon className="w-5 h-5" />
+            </motion.button>
+          </div>
+
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+            {processedImages.map((_, index) => (
+              <motion.button
+                key={index}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentImageIndex(index);
+                }}
+                className={`
+                  w-2 h-2 rounded-full transition-all duration-200
+                  ${currentImageIndex === index 
+                    ? 'bg-white w-4' 
+                    : 'bg-white/50 hover:bg-white/75'}
+                `}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.8 }}
+              />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
@@ -276,7 +370,22 @@ Card.propTypes = {
   loading: PropTypes.bool,
   className: PropTypes.string,
   onClick: PropTypes.func,
-  image: PropTypes.string,
+  images: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        src: PropTypes.string.isRequired,
+        alt: PropTypes.string,
+      })
+    ])
+  ),
+  image: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      src: PropTypes.string.isRequired,
+      alt: PropTypes.string,
+    })
+  ]),
   imageAlt: PropTypes.string,
   imagePosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right', 'background']),
   title: PropTypes.node,
@@ -288,6 +397,8 @@ Card.propTypes = {
   aspectRatio: PropTypes.string,
   blur: PropTypes.bool,
   overlay: PropTypes.bool,
+  enableImageNavigation: PropTypes.bool,
+  imageInterval: PropTypes.number,
 };
 
 export default Card; 

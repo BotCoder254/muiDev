@@ -42,8 +42,28 @@ function MyComponent() {
 \`\`\`
 `;
 
-const sampleImage = 'https://source.unsplash.com/random/800x600';
-const sampleAvatar = 'https://source.unsplash.com/random/100x100';
+const sampleImage = 'https://images.unsplash.com/photo-1682687982360-3fbab65f9d50?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80';
+const sampleAvatar = 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&h=300';
+
+// Sample images from various sources
+const sampleImages = [
+  {
+    src: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+    alt: 'Modern workspace',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1682687982360-3fbab65f9d50?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+    alt: 'Urban architecture',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1682687220063-4742bd7fd538?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+    alt: 'Nature landscape',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1682695796497-31a44224d6d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+    alt: 'City life',
+  },
+];
 
 export default {
   title: 'Components/Card',
@@ -183,11 +203,12 @@ export const ProductCard = Template.bind({});
 ProductCard.args = {
   variant: 'outlined',
   padding: 'medium',
-  image: sampleImage,
-  imageAlt: 'Product image',
+  images: sampleImages,
+  imageAlt: 'Product images',
   title: 'Product Name',
   subtitle: '$99.99',
   badges: ['Sale', '-20%'],
+  enableImageNavigation: true,
   actions: (
     <>
       <Button variant="outline" size="small">Add to Cart</Button>
@@ -200,12 +221,21 @@ export const GlassCard = Template.bind({});
 GlassCard.args = {
   variant: 'glass',
   padding: 'medium',
-  image: sampleImage,
-  imageAlt: 'Glass card image',
+  images: [
+    {
+      src: 'https://images.unsplash.com/photo-1682695794947-17061dc284dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+      alt: 'Aerial view',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+      alt: 'Mountain vista',
+    },
+  ],
   imagePosition: 'background',
   overlay: true,
   title: 'Glass Card',
-  subtitle: 'With background image',
+  subtitle: 'With background slideshow',
+  imageInterval: 3000,
 };
 GlassCard.parameters = {
   backgrounds: { default: 'colored' },
@@ -220,21 +250,113 @@ GradientCard.args = {
   showSocialActions: true,
 };
 
+export const ImageGalleryCard = Template.bind({});
+ImageGalleryCard.args = {
+  variant: 'elevated',
+  padding: 'medium',
+  images: sampleImages,
+  title: 'Image Gallery Card',
+  subtitle: 'Multiple images with navigation',
+  enableImageNavigation: true,
+  showSocialActions: true,
+};
+
+export const AutoSlideshowCard = Template.bind({});
+AutoSlideshowCard.args = {
+  variant: 'default',
+  padding: 'medium',
+  images: sampleImages,
+  title: 'Auto Slideshow Card',
+  subtitle: 'Images change automatically',
+  enableImageNavigation: true,
+  imageInterval: 2000, // Change image every 2 seconds
+};
+
 export const ImagePositions = () => (
   <div className="p-8 space-y-8">
     {['top', 'bottom', 'left', 'right', 'background'].map((position) => (
       <Card
         key={position}
-        image={sampleImage}
+        images={sampleImages}
         imagePosition={position}
-        title={`Image ${position}`}
+        title={`Images ${position}`}
+        subtitle={`Multiple images with ${position} position`}
         padding="medium"
+        enableImageNavigation
       >
         <ExampleContent />
       </Card>
     ))}
   </div>
 );
+
+export const InteractiveImageCards = () => (
+  <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <Card
+      interactive
+      hover
+      images={sampleImages}
+      title="Interactive Gallery Card"
+      subtitle="Click to interact"
+      padding="medium"
+      enableImageNavigation
+      onClick={() => console.log('Card clicked')}
+    >
+      <ExampleContent />
+    </Card>
+    <Card
+      interactive
+      hover
+      variant="gradient"
+      images={[
+        {
+          src: 'https://images.unsplash.com/photo-1682687220063-4742bd7fd538?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+          alt: 'Abstract patterns',
+        },
+        {
+          src: 'https://images.unsplash.com/photo-1682695794947-17061dc284dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+          alt: 'Minimal design',
+        },
+      ]}
+      title="Interactive Gradient Gallery"
+      subtitle="With auto slideshow"
+      padding="medium"
+      enableImageNavigation
+      imageInterval={3000}
+      onClick={() => console.log('Card clicked')}
+    >
+      <ExampleContent />
+    </Card>
+  </div>
+);
+
+export const DynamicLoadingCard = () => {
+  const [images, setImages] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    // Simulate loading images from an API
+    setTimeout(() => {
+      setImages(sampleImages);
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+  return (
+    <Card
+      variant="elevated"
+      padding="medium"
+      title="Dynamic Loading Card"
+      subtitle="Images loaded dynamically"
+      loading={loading}
+      images={images}
+      enableImageNavigation
+      showSocialActions
+    >
+      {!loading && <ExampleContent />}
+    </Card>
+  );
+};
 
 export const LoadingStates = () => (
   <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">

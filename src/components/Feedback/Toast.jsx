@@ -205,7 +205,7 @@ const Toast = ({
                 {action && (
                   <div className="mt-3 flex gap-3">
                     <button
-                      onClick={onAction}
+                      onClick={typeof action === 'object' ? action.onClick : onAction}
                       className={`
                         inline-flex items-center px-3 py-2 border border-transparent
                         text-sm leading-4 font-medium rounded-md shadow-sm
@@ -217,8 +217,12 @@ const Toast = ({
                         focus:ring-primary-500 transition-colors duration-200
                       `}
                     >
-                      {ActionIcon && <ActionIcon className="mr-2 -ml-1 w-4 h-4" />}
-                      {action}
+                      {typeof action === 'object' && action.icon ? (
+                        <action.icon className="mr-2 -ml-1 w-4 h-4" />
+                      ) : ActionIcon ? (
+                        <ActionIcon className="mr-2 -ml-1 w-4 h-4" />
+                      ) : null}
+                      {typeof action === 'object' ? action.label : action}
                     </button>
                   </div>
                 )}
