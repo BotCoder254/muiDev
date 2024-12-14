@@ -15,14 +15,14 @@
     <a href="https://github.com/telvinteum/muilibrary/blob/main/LICENSE">
       <img src="https://img.shields.io/npm/l/muilibrary?color=%237C3AED" alt="license" />
     </a>
-    <a href="https://github.com/telvinteum/muilibrary/stargazers">
+    <a href="https://github.com/BotCoder254/mui.git/stargazers">
       <img src="https://img.shields.io/github/stars/telvinteum/muilibrary?color=%237C3AED" alt="GitHub Stars" />
     </a>
-    <a href="https://github.com/telvinteum/muilibrary/network/members">
+    <a href="https://github.com/BotCoder254/mui/fork/network/members">
       <img src="https://img.shields.io/github/forks/telvinteum/muilibrary?color=%237C3AED" alt="GitHub Forks" />
     </a>
     <br/>
-    <a href="https://twitter.com/intent/tweet?text=Check%20out%20MUI%20Library%20-%20A%20beautiful%20React%20UI%20component%20library%20built%20with%20Tailwind%20CSS%20%26%20Framer%20Motion%21%20%F0%9F%9A%80&url=https%3A%2F%2Fgithub.com%2Ftelvinteum%2Fmuilibrary">
+    <a href="https://x.com/teumtelvin?t=S6izAbSJHRiOp_FdiuoCoQ&s=09">
       <img src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Ftelvinteum%2Fmuilibrary" alt="Tweet" />
     </a>
   </p>
