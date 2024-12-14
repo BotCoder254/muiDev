@@ -92,7 +92,7 @@
 ### Installation
 
 ```bash
-npm install muilibrary
+npm install  muidev
 ```
 
 ### Basic Usage

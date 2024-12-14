@@ -1,9 +1,9 @@
+import babel from '@rollup/plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
-import external from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
-import babel from '@rollup/plugin-babel';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 
 const packageJson = require('./package.json');
 
@@ -11,31 +11,32 @@ export default {
   input: 'src/index.js',
   output: [
     {
-      file: packageJson.main,
+      file: 'dist/index.js',
       format: 'cjs',
       sourcemap: true,
-      name: 'eventsys-mui'
+      exports: 'named'
     },
     {
-      file: packageJson.module,
+      file: 'dist/index.esm.js',
       format: 'esm',
-      sourcemap: true
+      sourcemap: true,
+      exports: 'named'
     }
   ],
   plugins: [
-    external(),
+    peerDepsExternal(),
     resolve({
-      browser: true,
-      extensions: ['.js', '.jsx']
+      extensions: ['.js', '.jsx'],
     }),
     commonjs({
-      include: /node_modules/
+      include: /node_modules/,
+      requireReturnsDefault: 'auto',
+      transformMixedEsModules: true,
     }),
     babel({
       exclude: 'node_modules/**',
       babelHelpers: 'bundled',
       presets: ['@babel/preset-env', '@babel/preset-react'],
-      extensions: ['.js', '.jsx']
     }),
     postcss({
       config: {
@@ -49,5 +50,6 @@ export default {
     }),
     terser()
   ],
-  external: ['react', 'react-dom', 'framer-motion', '@heroicons/react', 'react-icons']
+  external: ['react', 'react-dom', 'framer-motion', '@heroicons/react', 'react-icons'],
+  context: 'window',
 };

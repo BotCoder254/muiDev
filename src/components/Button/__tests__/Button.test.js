@@ -17,26 +17,25 @@ describe('Button Component', () => {
   });
 
   it('applies variant classes correctly', () => {
-    render(<Button variant="primary">Primary Button</Button>);
-    const button = screen.getByText('Primary Button');
-    expect(button).toHaveClass('bg-primary-600');
+    const { container } = render(<Button variant="primary">Primary Button</Button>);
+    expect(container.firstChild).toHaveClass('bg-primary-600');
   });
 
   it('applies size classes correctly', () => {
-    render(<Button size="large">Large Button</Button>);
-    const button = screen.getByText('Large Button');
-    expect(button).toHaveClass('px-6', 'py-3');
+    const { container } = render(<Button size="large">Large Button</Button>);
+    expect(container.firstChild).toHaveClass('px-6', 'py-3');
   });
 
   it('can be disabled', () => {
     render(<Button disabled>Disabled Button</Button>);
-    const button = screen.getByText('Disabled Button');
-    expect(button).toBeDisabled();
+    expect(screen.getByRole('button')).toBeDisabled();
+    expect(screen.getByRole('button')).toHaveClass('opacity-50', 'cursor-not-allowed');
   });
 
   it('shows loading state', () => {
-    render(<Button loading>Loading Button</Button>);
+    const { container } = render(<Button loading>Submit</Button>);
     expect(screen.getByText('Loading...')).toBeInTheDocument();
-    expect(screen.getByRole('button')).toBeDisabled();
+    expect(container.firstChild).toBeDisabled();
+    expect(container.firstChild).toHaveClass('opacity-50', 'cursor-not-allowed');
   });
 });

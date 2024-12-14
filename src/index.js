@@ -20,6 +20,9 @@ export { default as Container } from './components/Layout/Container';
 
 // Include additional component exports as they are added
 
+export { Button as default } from './components/Button/Button';
+export * from './components/Button/Button';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

@@ -1,6 +1,6 @@
 {
-  "name": "muilibrary",
-  "version": "0.1.0",
+  "name": "muidev",
+  "version": "0.1.1",
   "private": false,
   "description": "A modern React UI component library built with Tailwind CSS and Framer Motion. Beautiful, accessible, and customizable components for your next project.",
   "keywords": [
@@ -25,9 +25,9 @@
     "url": "https://github.com/BotCoder254/mui.git"
   },
   "bugs": {
-    "url": "https://github.com/BotCoder254/mui/issuess"
+    "url": "https://github.com/BotCoder254/mui/issues"
   },
-  "homepage": "comming soon",
+  "homepage": "https://github.com/BotCoder254/mui#readme",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "files": [
@@ -46,6 +46,7 @@
     "@tailwindcss/typography": "^0.5.15",
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.16",
+    "classnames": "^2.5.1",
     "framer-motion": "^11.14.1",
     "postcss": "^8.4.31",
     "react": ">=16.8.0",
