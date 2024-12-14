@@ -12,19 +12,19 @@
     <a href="https://www.npmjs.com/package/muilibrary">
       <img src="https://img.shields.io/npm/v/muilibrary?color=%237C3AED" alt="npm version" />
     </a>
-    <a href="https://github.com/telvinteum/muilibrary/blob/main/LICENSE">
+    <!-- <a href="https://github.com/telvinteum/muilibrary/blob/main/LICENSE">
       <img src="https://img.shields.io/npm/l/muilibrary?color=%237C3AED" alt="license" />
-    </a>
-    <a href="https://github.com/BotCoder254/mui.git/stargazers">
+    </a> -->
+    <!-- <a href="https://github.com/BotCoder254/mui.git/stargazers">
       <img src="https://img.shields.io/github/stars/telvinteum/muilibrary?color=%237C3AED" alt="GitHub Stars" />
-    </a>
-    <a href="https://github.com/BotCoder254/mui/fork/network/members">
+    </a> -->
+    <!-- <a href="https://github.com/BotCoder254/mui/fork/network/members">
       <img src="https://img.shields.io/github/forks/telvinteum/muilibrary?color=%237C3AED" alt="GitHub Forks" />
-    </a>
+    </a> -->
     <br/>
-    <a href="https://x.com/teumtelvin?t=S6izAbSJHRiOp_FdiuoCoQ&s=09">
+    <!-- <a href="https://x.com/teumtelvin?t=S6izAbSJHRiOp_FdiuoCoQ&s=09">
       <img src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Ftelvinteum%2Fmuilibrary" alt="Tweet" />
-    </a>
+    </a> -->
   </p>
 
   <p align="center">
