@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/comming%20soon/static/css/main.af9c808d.css",
+    "main.js": "/comming%20soon/static/js/main.4458cef1.js",
+    "index.html": "/comming%20soon/index.html",
+    "main.af9c808d.css.map": "/comming%20soon/static/css/main.af9c808d.css.map",
+    "main.4458cef1.js.map": "/comming%20soon/static/js/main.4458cef1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.af9c808d.css",
+    "static/js/main.4458cef1.js"
+  ]
+}
