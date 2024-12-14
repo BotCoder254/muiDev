@@ -37,9 +37,9 @@
 
   <br/>
 
-  <p align="center">
+  <!-- <p align="center">
     <img src="./assets/preview.gif" alt="MUI Library Preview" width="600px" />
-  </p>
+  </p> -->
 </div>
 
 ## ✨ Features
@@ -124,9 +124,9 @@ function App() {
 
 ### Navigation Components
 
-<div align="center">
+<!-- <div align="center">
   <img src="./assets/components/navigation.png" alt="Navigation Components" width="100%" />
-</div>
+</div> -->
 
 ```jsx
 import { Navbar, Sidebar, Breadcrumb, Tabs } from 'muilibrary';
@@ -159,9 +159,9 @@ import { Navbar, Sidebar, Breadcrumb, Tabs } from 'muilibrary';
 
 ### Data Display Components
 
-<div align="center">
+<!-- <div align="center">
   <img src="./assets/components/data-display.png" alt="Data Display Components" width="100%" />
-</div>
+</div> -->
 
 ```jsx
 // Modern Data Table
@@ -211,9 +211,9 @@ import { Navbar, Sidebar, Breadcrumb, Tabs } from 'muilibrary';
 
 ### Form Components
 
-<div align="center">
+<!-- <div align="center">
   <img src="./assets/components/forms.png" alt="Form Components" width="100%" />
-</div>
+</div> -->
 
 ```jsx
 // Modern Form Elements
