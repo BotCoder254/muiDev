@@ -1,7 +1,44 @@
 {
-  "name": "mui-components",
+  "name": "muilibrary",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "description": "A modern React UI component library built with Tailwind CSS and Framer Motion. Beautiful, accessible, and customizable components for your next project.",
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "tailwindcss",
+    "framer-motion",
+    "design-system",
+    "react-components",
+    "ui-library",
+    "kenya",
+    "african-tech"
+  ],
+  "author": "TELVIN TEUM",
+  "contributors": [
+    "SAMUELDEVLP"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/telvinteum/muilibrary"
+  },
+  "bugs": {
+    "url": "https://github.com/telvinteum/muilibrary/issues"
+  },
+  "homepage": "https://muilibrary.dev",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
+    "tailwindcss": ">=3.0.0"
+  },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
@@ -24,9 +61,22 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build:lib": "rollup -c",
+    "prepare": "npm run build:lib",
+    "prepublishOnly": "npm test && npm run build-storybook"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.0",
+    "@babel/preset-env": "^7.22.0",
+    "@babel/preset-react": "^7.22.0",
+    "@rollup/plugin-babel": "^6.0.0",
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-terser": "^0.4.0",
+    "rollup": "^2.79.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
     "@storybook/addon-docs": "^7.4.5",
     "@storybook/addon-essentials": "^7.4.5",
     "@storybook/addon-interactions": "^7.4.5",
