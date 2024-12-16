@@ -5,7 +5,7 @@
   
   <p align="center">
     <strong>A Professional React UI Component Library</strong><br>
-    Built with 💜 in Kenya
+    Built with 💜 in Africa
   </p>
 
   <p align="center">
