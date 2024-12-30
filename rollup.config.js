@@ -4,8 +4,9 @@ import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
 import postcss from 'rollup-plugin-postcss';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import { readFileSync } from 'fs';
 
-const packageJson = require('./package.json');
+const packageJson = JSON.parse(readFileSync('./package.json'));
 
 export default {
   input: 'src/index.js',
@@ -54,7 +55,7 @@ export default {
     }),
     postcss({
       config: {
-        path: './postcss.config.js'
+        path: './postcss.config.cjs'
       },
       extensions: ['.css'],
       minimize: true,

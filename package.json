@@ -2,6 +2,7 @@
   "name": "muidev",
   "version": "0.1.1",
   "private": false,
+  "type": "module",
   "description": "A modern React UI component library built with Tailwind CSS and Framer Motion. Beautiful, accessible, and customizable components for your next project.",
   "keywords": [
     "react",
@@ -63,7 +64,7 @@
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build:lib": "rollup -c",
+    "build:lib": "npx rollup -c",
     "prepare": "npm run build:lib",
     "prepublishOnly": "npm test && npm run build-storybook"
   },
