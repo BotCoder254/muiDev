@@ -21,6 +21,20 @@ export default {
       format: 'esm',
       sourcemap: true,
       exports: 'named'
+    },
+    {
+      file: 'dist/index.umd.js',
+      format: 'umd',
+      name: 'MuiDev',
+      globals: {
+        react: 'React',
+        'react-dom': 'ReactDOM',
+        'framer-motion': 'FramerMotion',
+        '@heroicons/react': 'HeroIcons',
+        'react-icons': 'ReactIcons'
+      },
+      sourcemap: true,
+      exports: 'named'
     }
   ],
   plugins: [

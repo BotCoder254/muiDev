@@ -95,6 +95,36 @@
 npm install  muidev
 ```
 
+### CDN Usage
+
+You can also use MuiDev directly in your HTML files via CDN:
+
+```html
+<!-- Add React and ReactDOM -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+<!-- Add Framer Motion -->
+<script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+
+<!-- Add MuiDev -->
+<script src="https://unpkg.com/muidev/dist/index.umd.js"></script>
+<link href="https://unpkg.com/muidev/dist/index.css" rel="stylesheet">
+
+<!-- Now you can use MuiDev components -->
+<script>
+  const { Button, Card } = MuiDev;
+  
+  const App = () => {
+    return React.createElement(Card, { className: "p-6" },
+      React.createElement(Button, { variant: "primary" }, "Click me")
+    );
+  };
+
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(React.createElement(App));
+</script>
+
 ### Basic Usage
 
 ```jsx
