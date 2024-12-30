@@ -97,18 +97,27 @@ npm install muidev
 
 ### CDN Usage
 
-You can use MuiDev directly in your HTML files via our GitHub Pages CDN:
+You can use MuiDev directly in your HTML files via CDN without installing anything:
 
 ```html
 <!-- Add Tailwind CSS (required for styling) -->
 <script src="https://cdn.tailwindcss.com"></script>
 
 <!-- Add MuiDev via CDN -->
-<script src="https://botcoder254.github.io/mui/muidev.umd.js"></script>
-<link href="https://botcoder254.github.io/mui/muidev.css" rel="stylesheet">
+<script src="https://unpkg.com/muidev@0.1.1/dist/index.umd.js"></script>
+<link href="https://unpkg.com/muidev@0.1.1/dist/index.css" rel="stylesheet">
 ```
 
-The CDN links are automatically updated whenever we push to the main branch or create a new release.
+You can also use a specific version or always get the latest:
+```html
+<!-- Latest version -->
+<script src="https://unpkg.com/muidev/dist/index.umd.js"></script>
+<link href="https://unpkg.com/muidev/dist/index.css" rel="stylesheet">
+
+<!-- Specific version -->
+<script src="https://unpkg.com/muidev@0.1.1/dist/index.umd.js"></script>
+<link href="https://unpkg.com/muidev@0.1.1/dist/index.css" rel="stylesheet">
+```
 
 #### Basic Example
 
@@ -120,6 +129,9 @@ Here's a simple example using a button and card component:
 <head>
     <meta charset="UTF-8">
     <title>MuiDev Basic Example</title>
+    
+    <!-- Add Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- MuiDev CDN links -->
     <script src="https://unpkg.com/muidev@0.1.1/dist/index.umd.js"></script>
