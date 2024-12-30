@@ -26,12 +26,17 @@ jobs:
       - name: Build Library
         run: npm run build:lib
 
+      - name: List dist directory
+        run: ls -la dist/
+
       - name: Create CDN Directory
         run: |
           mkdir -p cdn
           cp dist/index.umd.js cdn/muidev.umd.js
           cp dist/index.css cdn/muidev.css
+          cp dist/index.css.map cdn/muidev.css.map
           echo "Latest build completed on $(date)" > cdn/version.txt
+          echo "window.MUIDEV_VERSION = '${GITHUB_SHA}'" > cdn/version.js
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4

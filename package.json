@@ -64,7 +64,8 @@
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build:lib": "npx rollup -c",
+    "build:lib": "NODE_ENV=production npx rollup -c",
+    "build:css": "postcss src/index.css -o dist/index.css",
     "prepare": "npm run build:lib",
     "prepublishOnly": "npm test && npm run build-storybook"
   },
