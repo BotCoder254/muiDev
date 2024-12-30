@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MuiDev Pure HTML Example</title>
+
+    <!-- Add Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- MuiDev CDN links from GitHub Pages -->
+    <script src="https://botcoder254.github.io/mui/muidev.umd.js"></script>
+    <link href="https://botcoder254.github.io/mui/muidev.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-gray-800 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">MuiDev Demo</h1>
+            <div class="space-x-4">
+                <button class="muidev-button" data-variant="light">Home</button>
+                <button class="muidev-button" data-variant="light">About</button>
+                <button class="muidev-button" data-variant="light">Contact</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Card 1 -->
+            <div class="muidev-card p-6">
+                <h2 class="text-2xl font-bold mb-4">Welcome to MuiDev</h2>
+                <p class="text-gray-600 mb-4">
+                    This is a demo of MuiDev components using pure HTML.
+                </p>
+                <button class="muidev-button" data-variant="primary" data-ripple="true">
+                    Get Started
+                </button>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="muidev-card p-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white">
+                <h2 class="text-2xl font-bold mb-4">Features</h2>
+                <ul class="space-y-2 mb-4">
+                    <li>✨ Modern Design System</li>
+                    <li>🌓 Dark Mode Support</li>
+                    <li>📱 Fully Responsive</li>
+                    <li>⚡ High Performance</li>
+                </ul>
+                <button class="muidev-button" data-variant="light" data-ripple="true">
+                    Learn More
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize MuiDev components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize buttons
+            document.querySelectorAll('.muidev-button').forEach(button => {
+                const variant = button.getAttribute('data-variant') || 'primary';
+                const hasRipple = button.getAttribute('data-ripple') === 'true';
+                
+                // Apply MuiDev button styles
+                button.classList.add(
+                    `muidev-btn-${variant}`,
+                    'px-4',
+                    'py-2',
+                    'rounded',
+                    'transition-all'
+                );
+                
+                if (hasRipple) {
+                    button.classList.add('muidev-ripple');
+                }
+            });
+
+            // Initialize cards
+            document.querySelectorAll('.muidev-card').forEach(card => {
+                card.classList.add(
+                    'rounded-lg',
+                    'shadow-lg',
+                    'transition-all',
+                    'hover:shadow-xl'
+                );
+            });
+        });
+    </script>
+</body>
+</html>

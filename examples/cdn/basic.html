@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MuiDev Basic Example</title>
+
+    <!-- Add Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- MuiDev CDN links from GitHub Pages -->
+    <script src="https://botcoder254.github.io/mui/muidev.umd.js"></script>
+    <link href="https://botcoder254.github.io/mui/muidev.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Basic Button -->
+    <button class="muidev-button" data-variant="primary" data-ripple="true">
+        Click Me
+    </button>
+
+    <!-- Basic Card -->
+    <div class="muidev-card p-4 m-4">
+        <h3>Simple Card</h3>
+        <p>This is a basic card component.</p>
+    </div>
+
+    <script>
+        // Initialize components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize button
+            const button = document.querySelector('.muidev-button');
+            button.classList.add('muidev-btn-primary', 'px-4', 'py-2', 'rounded', 'muidev-ripple');
+
+            // Initialize card
+            const card = document.querySelector('.muidev-card');
+            card.classList.add('rounded-lg', 'shadow-lg', 'bg-white');
+        });
+    </script>
+</body>
+</html> 

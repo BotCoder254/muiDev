@@ -1,0 +1,41 @@
+name: Build and Deploy CDN
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types: [created]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Library
+        run: npm run build:lib
+
+      - name: Create CDN Directory
+        run: |
+          mkdir -p cdn
+          cp dist/index.umd.js cdn/muidev.umd.js
+          cp dist/index.css cdn/muidev.css
+          echo "Latest build completed on $(date)" > cdn/version.txt
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: cdn
+          branch: gh-pages
+          clean: true 

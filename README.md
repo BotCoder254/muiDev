@@ -89,43 +89,109 @@
 
 ## 🚀 Quick Start
 
-### Installation
+### NPM Installation
 
 ```bash
-npm install  muidev
+npm install muidev
 ```
 
 ### CDN Usage
 
-You can also use MuiDev directly in your HTML files via CDN:
+You can use MuiDev directly in your HTML files via our GitHub Pages CDN:
 
 ```html
-<!-- Add React and ReactDOM -->
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<!-- Add Tailwind CSS (required for styling) -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Add Framer Motion -->
-<script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+<!-- Add MuiDev via CDN -->
+<script src="https://botcoder254.github.io/mui/muidev.umd.js"></script>
+<link href="https://botcoder254.github.io/mui/muidev.css" rel="stylesheet">
+```
 
-<!-- Add MuiDev -->
-<script src="https://unpkg.com/muidev/dist/index.umd.js"></script>
-<link href="https://unpkg.com/muidev/dist/index.css" rel="stylesheet">
+The CDN links are automatically updated whenever we push to the main branch or create a new release.
 
-<!-- Now you can use MuiDev components -->
-<script>
-  const { Button, Card } = MuiDev;
-  
-  const App = () => {
-    return React.createElement(Card, { className: "p-6" },
-      React.createElement(Button, { variant: "primary" }, "Click me")
-    );
-  };
+#### Basic Example
 
-  const root = ReactDOM.createRoot(document.getElementById('root'));
-  root.render(React.createElement(App));
-</script>
+Here's a simple example using a button and card component:
 
-### Basic Usage
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MuiDev Basic Example</title>
+    
+    <!-- MuiDev CDN links -->
+    <script src="https://unpkg.com/muidev@0.1.1/dist/index.umd.js"></script>
+    <link href="https://unpkg.com/muidev@0.1.1/dist/index.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Basic Button -->
+    <button class="muidev-button" data-variant="primary" data-ripple="true">
+        Click Me
+    </button>
+
+    <!-- Basic Card -->
+    <div class="muidev-card p-4 m-4">
+        <h3>Simple Card</h3>
+        <p>This is a basic card component.</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize button
+            const button = document.querySelector('.muidev-button');
+            button.classList.add('muidev-btn-primary', 'px-4', 'py-2', 'rounded', 'muidev-ripple');
+
+            // Initialize card
+            const card = document.querySelector('.muidev-card');
+            card.classList.add('rounded-lg', 'shadow-lg', 'bg-white');
+        });
+    </script>
+</body>
+</html>
+```
+
+#### Advanced Example
+
+For a more comprehensive example including navigation, cards, and responsive layout, check out our [examples directory](examples/cdn/index.html).
+
+Key features demonstrated in the advanced example:
+- Responsive navigation bar
+- Grid layout system
+- Cards with gradients
+- Buttons with ripple effects
+- Dark/light variants
+- Hover animations
+
+### Component Classes
+
+When using MuiDev via CDN, use these CSS classes:
+
+```html
+<!-- Buttons -->
+<button class="muidev-button" data-variant="primary|secondary|light|dark" data-ripple="true|false">
+    Button Text
+</button>
+
+<!-- Cards -->
+<div class="muidev-card">
+    Card Content
+</div>
+
+<!-- Container -->
+<div class="container mx-auto">
+    Centered Content
+</div>
+```
+
+Available data-variant options for buttons:
+- `primary` - Primary color button
+- `secondary` - Secondary color button
+- `light` - Light variant
+- `dark` - Dark variant
+
+### React Usage
 
 ```jsx
 import { Button, Card } from 'muilibrary';
