@@ -59,7 +59,10 @@ export default {
       },
       extensions: ['.css'],
       minimize: true,
-      extract: 'index.css',
+      extract: path => path.replace(/\.js$/, '.css'),
+      modules: false,
+      autoModules: false,
+      sourceMap: true,
       inject: false
     }),
     terser()

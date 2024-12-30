@@ -65,8 +65,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build:lib": "NODE_ENV=production npx rollup -c",
-    "build:css": "postcss src/index.css -o dist/index.css",
-    "prepare": "npm run build:lib",
+    "build:css": "NODE_ENV=production postcss src/index.css -o dist/index.css --config postcss.config.cjs",
+    "prepare": "npm run build:lib && npm run build:css",
     "prepublishOnly": "npm test && npm run build-storybook"
   },
   "devDependencies": {

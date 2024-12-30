@@ -24,17 +24,42 @@ jobs:
         run: npm install
 
       - name: Build Library
-        run: npm run build:lib
+        run: |
+          npm run build:lib
+          npm run build:css
 
-      - name: List dist directory
-        run: ls -la dist/
+      - name: Debug Build Output
+        run: |
+          echo "Contents of dist directory:"
+          ls -la dist/
+          echo "Contents of src directory:"
+          ls -la src/
 
       - name: Create CDN Directory
         run: |
           mkdir -p cdn
-          cp dist/index.umd.js cdn/muidev.umd.js
-          cp dist/index.css cdn/muidev.css
-          cp dist/index.css.map cdn/muidev.css.map
+          # Copy UMD bundle
+          if [ -f dist/index.umd.js ]; then
+            cp dist/index.umd.js cdn/muidev.umd.js
+          else
+            echo "Warning: UMD bundle not found"
+            exit 1
+          fi
+          
+          # Copy CSS files
+          if [ -f dist/index.css ]; then
+            cp dist/index.css cdn/muidev.css
+          else
+            echo "Warning: CSS file not found"
+            exit 1
+          fi
+          
+          # Copy sourcemap if it exists
+          if [ -f dist/index.css.map ]; then
+            cp dist/index.css.map cdn/muidev.css.map
+          fi
+          
+          # Create version files
           echo "Latest build completed on $(date)" > cdn/version.txt
           echo "window.MUIDEV_VERSION = '${GITHUB_SHA}'" > cdn/version.js
 
