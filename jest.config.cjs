@@ -1,9 +1,9 @@
 module.exports = {
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.cjs'],
   moduleNameMapper: {
-    '\\.(css|less|scss|sass)$': '<rootDir>/test/__mocks__/styleMock.js',
-    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/test/__mocks__/fileMock.js'
+    '\\.(css|less|scss|sass)$': '<rootDir>/test/__mocks__/styleMock.cjs',
+    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/test/__mocks__/fileMock.cjs'
   },
   transform: {
     '^.+\\.(js|jsx)$': 'babel-jest'
