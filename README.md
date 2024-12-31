@@ -119,50 +119,7 @@ You can also use a specific version or always get the latest:
 <link href="https://unpkg.com/muidev@0.1.1/dist/index.css" rel="stylesheet">
 ```
 
-#### Basic Example
 
-Here's a simple example using a button and card component:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>MuiDev Basic Example</title>
-    
-    <!-- Add Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- MuiDev CDN links -->
-    <script src="https://unpkg.com/muidev@0.1.1/dist/index.umd.js"></script>
-    <link href="https://unpkg.com/muidev@0.1.1/dist/index.css" rel="stylesheet">
-</head>
-<body>
-    <!-- Basic Button -->
-    <button class="muidev-button" data-variant="primary" data-ripple="true">
-        Click Me
-    </button>
-
-    <!-- Basic Card -->
-    <div class="muidev-card p-4 m-4">
-        <h3>Simple Card</h3>
-        <p>This is a basic card component.</p>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize button
-            const button = document.querySelector('.muidev-button');
-            button.classList.add('muidev-btn-primary', 'px-4', 'py-2', 'rounded', 'muidev-ripple');
-
-            // Initialize card
-            const card = document.querySelector('.muidev-card');
-            card.classList.add('rounded-lg', 'shadow-lg', 'bg-white');
-        });
-    </script>
-</body>
-</html>
-```
 
 #### Advanced Example
 

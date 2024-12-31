@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MuiDev Website Example</title>
+
+    <!-- Add Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- MuiDev CDN links -->
+    <script src="https://unpkg.com/muidev@0.1.2/dist/index.umd.js"></script>
+    <link href="https://unpkg.com/muidev@0.1.2/dist/index.css" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Button Styles */
+        .muidev-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+        }
+
+        .muidev-button[data-variant="primary"] {
+            background-color: #7c3aed;
+            color: white;
+        }
+
+        .muidev-button[data-variant="primary"]:hover {
+            background-color: #6d28d9;
+        }
+
+        .muidev-button[data-variant="secondary"] {
+            background-color: #ede9fe;
+            color: #6d28d9;
+        }
+
+        .muidev-button[data-variant="secondary"]:hover {
+            background-color: #ddd6fe;
+        }
+
+        .muidev-button[data-variant="light"] {
+            background-color: white;
+            color: #6d28d9;
+            border: 1px solid #e5e7eb;
+        }
+
+        .muidev-button[data-variant="light"]:hover {
+            background-color: #f9fafb;
+        }
+
+        /* Ripple Effect */
+        .muidev-ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Navbar Styles */
+        .muidev-navbar {
+            background: linear-gradient(to right, #7c3aed, #6d28d9);
+            padding: 1rem;
+            color: white;
+        }
+
+        .muidev-navbar .nav-items {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .muidev-navbar .nav-items {
+                display: none;
+            }
+            .muidev-navbar .nav-items.show {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(to right, #7c3aed, #6d28d9);
+                padding: 1rem;
+            }
+        }
+
+        /* Card Styles */
+        .muidev-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.2s ease;
+        }
+
+        .muidev-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Alert Styles */
+        .muidev-alert {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .muidev-alert[data-type="info"] {
+            background-color: #e1f5fe;
+            color: #0277bd;
+        }
+
+        .muidev-alert[data-type="success"] {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .muidev-alert[data-type="warning"] {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .muidev-alert[data-type="error"] {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        /* Form Styles */
+        .muidev-input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
+        }
+
+        .muidev-input:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        /* Table Styles */
+        .muidev-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .muidev-table th {
+            background-color: #f9fafb;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 500;
+            color: #6b7280;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .muidev-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        /* Badge Styles */
+        .muidev-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .muidev-badge[data-type="success"] {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .muidev-badge[data-type="warning"] {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .muidev-badge[data-type="error"] {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .muidev-badge[data-type="info"] {
+            background-color: #e1f5fe;
+            color: #0277bd;
+        }
+
+        .muidev-badge[data-removable="true"] {
+            padding-right: 0.5rem;
+            cursor: pointer;
+        }
+
+        /* Switch Styles */
+        .muidev-switch {
+            position: relative;
+            display: inline-block;
+            width: 3.5rem;
+            height: 2rem;
+        }
+
+        .muidev-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .muidev-switch .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e5e7eb;
+            transition: .4s;
+            border-radius: 2rem;
+        }
+
+        .muidev-switch .slider:before {
+            position: absolute;
+            content: "";
+            height: 1.5rem;
+            width: 1.5rem;
+            left: 0.25rem;
+            bottom: 0.25rem;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        .muidev-switch input:checked + .slider {
+            background-color: #7c3aed;
+        }
+
+        .muidev-switch input:checked + .slider:before {
+            transform: translateX(1.5rem);
+        }
+
+        /* Breadcrumb Styles */
+        .muidev-breadcrumb {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+
+        .muidev-breadcrumb ol {
+            display: flex;
+            align-items: center;
+        }
+
+        .muidev-breadcrumb li {
+            display: flex;
+            align-items: center;
+        }
+
+        .muidev-breadcrumb a {
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        /* Loader Styles */
+        .muidev-loader {
+            display: inline-block;
+        }
+
+        .muidev-loader[data-variant="spinner"] {
+            width: 2rem;
+            height: 2rem;
+            border: 3px solid #e5e7eb;
+            border-top-color: #7c3aed;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .muidev-loader[data-variant="dots"] {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .muidev-loader[data-variant="dots"]::before,
+        .muidev-loader[data-variant="dots"]::after {
+            content: "";
+            width: 0.5rem;
+            height: 0.5rem;
+            background-color: #7c3aed;
+            border-radius: 50%;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        .muidev-loader[data-variant="dots"]::after {
+            animation-delay: 0.5s;
+        }
+
+        .muidev-loader[data-variant="pulse"] {
+            width: 2rem;
+            height: 2rem;
+            background-color: #7c3aed;
+            border-radius: 50%;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+        }
+
+        /* Tabs Styles */
+        .muidev-tabs {
+            background-color: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .muidev-tabs button {
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .muidev-tabs button:hover {
+            color: #7c3aed;
+        }
+
+        .muidev-tabs button.active {
+            color: #7c3aed;
+            border-bottom-color: #7c3aed;
+        }
+
+        /* File Upload Styles */
+        .muidev-file-upload {
+            position: relative;
+            width: 100%;
+            min-height: 150px;
+            border: 2px dashed #e5e7eb;
+            border-radius: 0.5rem;
+            background-color: #f9fafb;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .muidev-file-upload:hover {
+            border-color: #7c3aed;
+            background-color: #f5f3ff;
+        }
+
+        .muidev-file-upload.dragging {
+            border-color: #7c3aed;
+            background-color: #f5f3ff;
+        }
+
+        .muidev-file-upload input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .muidev-file-upload .upload-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .muidev-file-upload .upload-icon {
+            font-size: 2rem;
+            color: #7c3aed;
+            margin-bottom: 1rem;
+        }
+
+        .muidev-file-upload .upload-text {
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .muidev-file-upload .upload-hint {
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+
+        .muidev-file-upload .file-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .muidev-file-upload .file-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background-color: white;
+            border-radius: 0.375rem;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .muidev-file-upload .file-item .file-icon {
+            color: #7c3aed;
+        }
+
+        .muidev-file-upload .file-item .file-name {
+            font-size: 0.875rem;
+            color: #374151;
+        }
+
+        .muidev-file-upload .file-item .remove-file {
+            color: #ef4444;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 9999px;
+            transition: all 0.2s ease;
+        }
+
+        .muidev-file-upload .file-item .remove-file:hover {
+            background-color: #fee2e2;
+        }
+
+        /* Progress Bar Animations */
+        @keyframes progress {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes indeterminate {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(200%);
+            }
+        }
+
+        .bg-stripes {
+            background-image: linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.15) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.15) 50%,
+                rgba(255, 255, 255, 0.15) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 1rem 1rem;
+            animation: stripes 1s linear infinite;
+        }
+
+        @keyframes stripes {
+            from {
+                background-position: 1rem 0;
+            }
+            to {
+                background-position: 0 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header/Navigation -->
+    <nav class="sticky top-0 z-40 transition-colors duration-200">
+        <div class="muidev-navbar">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                        <img src="https://via.placeholder.com/40" alt="Logo" class="h-8 w-8 rounded-full">
+                        <span class="text-xl font-bold">MuiDev Demo</span>
+                    </div>
+                    <div class="nav-items">
+                        <button class="muidev-button" data-variant="light">
+                            <i class="fas fa-home mr-2"></i>Home
+                        </button>
+                        <button class="muidev-button" data-variant="light">
+                            <i class="fas fa-star mr-2"></i>Features
+                        </button>
+                        <button class="muidev-button" data-variant="light">
+                            <i class="fas fa-cube mr-2"></i>Components
+                        </button>
+                        <button class="muidev-button" data-variant="light">
+                            <i class="fas fa-tag mr-2"></i>Pricing
+                        </button>
+                        <button class="muidev-button" data-variant="primary" data-ripple="true">
+                            <i class="fas fa-envelope mr-2"></i>Contact Us
+                        </button>
+                    </div>
+                    <div class="md:hidden">
+                        <button class="muidev-button" data-variant="light">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Modern UI Components</h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">Build beautiful interfaces with our ready-to-use components</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="muidev-button" data-variant="light" data-ripple="true">
+                    <i class="fas fa-play mr-2"></i>Get Started
+                </button>
+                <button class="muidev-button" data-variant="primary" data-ripple="true">
+                    <i class="fas fa-book mr-2"></i>Documentation
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature Cards -->
+                <div class="muidev-card p-6">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-paint-brush text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Beautiful Design</h3>
+                    <p class="text-gray-600">Modern and clean components with customizable options.</p>
+                </div>
+
+                <div class="muidev-card p-6">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-bolt text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Easy to Use</h3>
+                    <p class="text-gray-600">Simple integration with your existing projects.</p>
+                </div>
+
+                <div class="muidev-card p-6">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-mobile-alt text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Responsive</h3>
+                    <p class="text-gray-600">Works perfectly on all devices and screen sizes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Components Section -->
+    <div class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Component Showcase</h2>
+
+            <!-- Buttons -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Buttons</h3>
+                <div class="flex flex-wrap gap-4">
+                    <button class="muidev-button" data-variant="primary" data-ripple="true">Primary</button>
+                    <button class="muidev-button" data-variant="secondary" data-ripple="true">Secondary</button>
+                    <button class="muidev-button" data-variant="light" data-ripple="true">Light</button>
+                    <button class="muidev-button" data-variant="primary" data-ripple="true" disabled>Disabled</button>
+                    <button class="muidev-button" data-variant="primary" data-ripple="true">
+                        <i class="fas fa-download mr-2"></i>With Icon
+                    </button>
+                </div>
+            </div>
+
+            <!-- Alerts -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Alerts</h3>
+                <div class="space-y-4">
+                    <div class="muidev-alert" data-type="info">
+                        <i class="fas fa-info-circle mr-2"></i>This is an info alert
+                    </div>
+                    <div class="muidev-alert" data-type="success">
+                        <i class="fas fa-check-circle mr-2"></i>This is a success alert
+                    </div>
+                    <div class="muidev-alert" data-type="warning">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>This is a warning alert
+                    </div>
+                    <div class="muidev-alert" data-type="error">
+                        <i class="fas fa-times-circle mr-2"></i>This is an error alert
+                    </div>
+                </div>
+            </div>
+
+            <!-- Badges -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Badges</h3>
+                <div class="flex flex-wrap gap-4">
+                    <span class="muidev-badge" data-type="success">Success</span>
+                    <span class="muidev-badge" data-type="warning">Warning</span>
+                    <span class="muidev-badge" data-type="error">Error</span>
+                    <span class="muidev-badge" data-type="info">Info</span>
+                    <span class="muidev-badge" data-type="success" data-removable="true">Removable</span>
+                </div>
+            </div>
+
+            <!-- Forms -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Form Elements</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Input Field</label>
+                        <input type="text" class="muidev-input" placeholder="Enter text">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Select Field</label>
+                        <select class="muidev-input">
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                            <option>Option 3</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Switch</label>
+                        <label class="muidev-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">File Upload</label>
+                        <div class="muidev-file-upload">
+                            <input type="file" multiple>
+                            <div class="upload-content">
+                                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                <div class="upload-text">Drag and drop files here or click to browse</div>
+                                <div class="upload-hint">Supports multiple files</div>
+                            </div>
+                            <div class="file-preview hidden">
+                                <!-- File items will be added here dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Table</h3>
+                <table class="muidev-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td><span class="muidev-badge" data-type="success">Active</span></td>
+                            <td>Admin</td>
+                            <td>
+                                <button class="muidev-button" data-variant="light">Edit</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td><span class="muidev-badge" data-type="warning">Pending</span></td>
+                            <td>User</td>
+                            <td>
+                                <button class="muidev-button" data-variant="light">Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Breadcrumb -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Breadcrumb</h3>
+                <nav class="muidev-breadcrumb">
+                    <ol class="flex items-center space-x-2">
+                        <li><a href="#" class="text-gray-500 hover:text-gray-700">Home</a></li>
+                        <li class="text-gray-400">/</li>
+                        <li><a href="#" class="text-gray-500 hover:text-gray-700">Products</a></li>
+                        <li class="text-gray-400">/</li>
+                        <li class="text-gray-700">Current Page</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <!-- Modal -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Modal</h3>
+                <button class="muidev-button" data-variant="primary" data-ripple="true" onclick="document.getElementById('demo-modal').classList.remove('hidden')">
+                    Open Modal
+                </button>
+                <div id="demo-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div class="muidev-card p-6 max-w-lg w-full mx-4 relative">
+                        <button class="absolute top-4 right-4" onclick="document.getElementById('demo-modal').classList.add('hidden')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <h3 class="text-xl font-semibold mb-4">Modal Title</h3>
+                        <p class="text-gray-600 mb-6">This is a sample modal dialog. You can add any content here.</p>
+                        <div class="flex justify-end gap-4">
+                            <button class="muidev-button" data-variant="light" onclick="document.getElementById('demo-modal').classList.add('hidden')">Cancel</button>
+                            <button class="muidev-button" data-variant="primary">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loaders -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Loaders</h3>
+                <div class="flex flex-wrap gap-8">
+                    <!-- Spinner -->
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-8 h-8 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin"></div>
+                        <span class="text-sm text-gray-600">Spinner</span>
+                    </div>
+
+                    <!-- Dots -->
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="flex gap-1">
+                            <div class="w-2 h-2 bg-purple-600 rounded-full animate-bounce"></div>
+                            <div class="w-2 h-2 bg-purple-600 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                            <div class="w-2 h-2 bg-purple-600 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+                        </div>
+                        <span class="text-sm text-gray-600">Dots</span>
+                    </div>
+
+                    <!-- Pulse -->
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-8 h-8 bg-purple-600 rounded-full animate-pulse"></div>
+                        <span class="text-sm text-gray-600">Pulse</span>
+                    </div>
+
+                    <!-- Progress -->
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-16 h-16 relative">
+                            <div class="absolute inset-0 border-4 border-purple-200 rounded-full"></div>
+                            <div class="absolute inset-0 border-4 border-purple-600 rounded-full animate-[progress_2s_linear_infinite]" style="clip-path: polygon(0 0, 75% 0, 75% 100%, 0 100%)"></div>
+                            <div class="absolute inset-0 flex items-center justify-center text-sm font-medium text-purple-600">75%</div>
+                        </div>
+                        <span class="text-sm text-gray-600">Progress</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Progress Bars -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Advanced Progress Bars</h3>
+                <div class="space-y-6">
+                    <!-- Progress with Status -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <span class="text-sm font-medium">Completed</span>
+                            </div>
+                            <span class="text-sm font-medium">100%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Progress with Warning -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+                                <span class="text-sm font-medium">Storage Space</span>
+                            </div>
+                            <span class="text-sm font-medium">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Progress with Error -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-times-circle text-red-500"></i>
+                                <span class="text-sm font-medium">Failed Tasks</span>
+                            </div>
+                            <span class="text-sm font-medium">30%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-red-500 h-2.5 rounded-full" style="width: 30%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Indeterminate Progress -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-sync-alt text-blue-500 animate-spin"></i>
+                                <span class="text-sm font-medium">Processing</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+                            <div class="bg-blue-500 h-2.5 rounded-full animate-[indeterminate_1s_ease-in-out_infinite]" style="width: 30%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avatar -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Avatars</h3>
+                <div class="space-y-6">
+                    <!-- Single Avatars -->
+                    <div class="flex flex-wrap gap-4">
+                        <div class="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white">JD</div>
+                        <div class="w-8 h-8 rounded-full overflow-hidden">
+                            <img src="https://via.placeholder.com/40" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                            <i class="fas fa-user text-gray-500"></i>
+                        </div>
+                    </div>
+
+                    <!-- Avatar Group -->
+                    <div class="flex -space-x-2">
+                        <div class="w-10 h-10 rounded-full border-2 border-white bg-purple-500 flex items-center justify-center text-white">JD</div>
+                        <div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden">
+                            <img src="https://via.placeholder.com/40" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-10 h-10 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center">
+                            <span class="text-sm text-gray-600">+3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tags -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Tags</h3>
+                <div class="flex flex-wrap gap-2">
+                    <!-- Basic Tags -->
+                    <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Basic Tag</span>
+                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Success</span>
+                    <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">Error</span>
+
+                    <!-- Removable Tags -->
+                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm flex items-center gap-1">
+                        Removable
+                        <button class="hover:text-blue-900">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </span>
+
+                    <!-- Icon Tags -->
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm flex items-center gap-1">
+                        <i class="fas fa-star"></i>
+                        Featured
+                    </span>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Sidebar Navigation</h3>
+                <div class="flex h-[500px] bg-gray-100 rounded-lg overflow-hidden">
+                    <!-- Sidebar -->
+                    <div class="w-64 bg-white shadow-lg flex flex-col">
+                        <!-- Sidebar Header -->
+                        <div class="p-4 border-b">
+                            <div class="flex items-center space-x-4">
+                                <img src="https://via.placeholder.com/40" alt="Logo" class="h-8 w-8 rounded-full">
+                                <span class="text-lg font-semibold">Dashboard</span>
+                            </div>
+                        </div>
+
+                        <!-- Sidebar Navigation -->
+                        <nav class="flex-1 p-4 space-y-2">
+                            <a href="#" class="flex items-center space-x-3 px-3 py-2 text-purple-600 bg-purple-50 rounded-lg">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                            <a href="#" class="flex items-center space-x-3 px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Analytics</span>
+                            </a>
+                            <a href="#" class="flex items-center space-x-3 px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+                                <i class="fas fa-users"></i>
+                                <span>Team</span>
+                            </a>
+                            <a href="#" class="flex items-center space-x-3 px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                        </nav>
+
+                        <!-- Sidebar Footer -->
+                        <div class="p-4 border-t">
+                            <div class="flex items-center space-x-3 px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg cursor-pointer">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="flex-1 p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Stats Card -->
+                            <div class="bg-white p-4 rounded-lg shadow">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="text-gray-500">Total Users</h4>
+                                    <i class="fas fa-users text-purple-500"></i>
+                                </div>
+                                <p class="text-2xl font-semibold mt-2">1,234</p>
+                                <div class="text-sm text-green-500 mt-2">
+                                    <i class="fas fa-arrow-up"></i> 12% increase
+                                </div>
+                            </div>
+
+                            <!-- Stats Card -->
+                            <div class="bg-white p-4 rounded-lg shadow">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="text-gray-500">Revenue</h4>
+                                    <i class="fas fa-dollar-sign text-purple-500"></i>
+                                </div>
+                                <p class="text-2xl font-semibold mt-2">$12,345</p>
+                                <div class="text-sm text-red-500 mt-2">
+                                    <i class="fas fa-arrow-down"></i> 5% decrease
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="mt-6">
+                            <h4 class="text-lg font-semibold mb-4">Recent Activity</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                                        <i class="fas fa-user text-purple-500"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">New user registered</p>
+                                        <p class="text-xs text-gray-500">2 minutes ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">Task completed</p>
+                                        <p class="text-xs text-gray-500">5 minutes ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Tabs</h3>
+                <div class="muidev-tabs">
+                    <div class="border-b border-gray-200">
+                        <nav class="flex space-x-4">
+                            <button class="px-4 py-2 text-sm font-medium text-purple-600 border-b-2 border-purple-600">Overview</button>
+                            <button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">Analytics</button>
+                            <button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">Reports</button>
+                        </nav>
+                    </div>
+                    <div class="p-4">
+                        <div class="space-y-4">
+                            <p class="text-gray-600">This is the overview tab content. You can add any content here.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h5 class="font-medium mb-2">Total Sales</h5>
+                                    <p class="text-2xl font-bold">$12,345</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h5 class="font-medium mb-2">Active Users</h5>
+                                    <p class="text-2xl font-bold">1,234</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h5 class="font-medium mb-2">Conversion Rate</h5>
+                                    <p class="text-2xl font-bold">2.5%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Accordion</h3>
+                <div class="space-y-2">
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full flex justify-between items-center p-4 text-left">
+                            <span class="font-medium">What is MuiDev?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="p-4 border-t border-gray-200">
+                            <p class="text-gray-600">MuiDev is a modern UI component library that helps you build beautiful and responsive web interfaces quickly.</p>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full flex justify-between items-center p-4 text-left">
+                            <span class="font-medium">How to get started?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="p-4 border-t border-gray-200 hidden">
+                            <p class="text-gray-600">Simply include the MuiDev CDN links in your HTML file and start using the components. Check our documentation for detailed instructions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typography -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Typography</h3>
+                <div class="space-y-4">
+                    <h1 class="text-4xl font-bold">Heading 1</h1>
+                    <h2 class="text-3xl font-bold">Heading 2</h2>
+                    <h3 class="text-2xl font-bold">Heading 3</h3>
+                    <h4 class="text-xl font-bold">Heading 4</h4>
+                    <p class="text-base">Regular paragraph text with <strong>bold</strong>, <em>italic</em>, and <u>underline</u> styles.</p>
+                    <div class="text-sm text-gray-600">Small text for captions and helper text</div>
+                    <blockquote class="pl-4 border-l-4 border-purple-500 italic">
+                        This is a blockquote with a custom style
+                    </blockquote>
+                    <div class="text-purple-600">Colored text for emphasis</div>
+                </div>
+            </div>
+
+            <!-- Media -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Media Components</h3>
+                <div class="space-y-6">
+                    <!-- Image with Overlay -->
+                    <div class="relative rounded-lg overflow-hidden group">
+                        <img src="https://via.placeholder.com/600x300" alt="Featured" class="w-full h-auto">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="muidev-button" data-variant="light">View Image</button>
+                        </div>
+                    </div>
+
+                    <!-- Video Placeholder -->
+                    <div class="relative rounded-lg overflow-hidden bg-gray-900 aspect-video">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <button class="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+                                <i class="fas fa-play text-2xl text-purple-600"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Image Gallery -->
+                    <div class="grid grid-cols-3 gap-4">
+                        <img src="https://via.placeholder.com/200" alt="Gallery 1" class="rounded-lg">
+                        <img src="https://via.placeholder.com/200" alt="Gallery 2" class="rounded-lg">
+                        <img src="https://via.placeholder.com/200" alt="Gallery 3" class="rounded-lg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layout Components -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Layout Components</h3>
+                
+                <!-- Grid Layout -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-medium mb-3">Grid Layout</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-purple-100 p-4 rounded-lg text-center">Grid Item 1</div>
+                        <div class="bg-purple-100 p-4 rounded-lg text-center">Grid Item 2</div>
+                        <div class="bg-purple-100 p-4 rounded-lg text-center">Grid Item 3</div>
+                    </div>
+                </div>
+
+                <!-- Flex Layout -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-medium mb-3">Flex Layout</h4>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex-1 bg-purple-100 p-4 rounded-lg text-center">Flex Item 1</div>
+                        <div class="flex-1 bg-purple-100 p-4 rounded-lg text-center">Flex Item 2</div>
+                        <div class="flex-1 bg-purple-100 p-4 rounded-lg text-center">Flex Item 3</div>
+                    </div>
+                </div>
+
+                <!-- Container with Sidebar -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-medium mb-3">Container with Sidebar</h4>
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="md:w-64 bg-purple-100 p-4 rounded-lg">Sidebar</div>
+                        <div class="flex-1 bg-purple-100 p-4 rounded-lg">Main Content Area</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Form Controls -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Advanced Form Controls</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Date Picker -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Date Picker</label>
+                        <input type="date" class="muidev-input">
+                    </div>
+
+                    <!-- Time Picker -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Time Picker</label>
+                        <input type="time" class="muidev-input">
+                    </div>
+
+                    <!-- Color Picker -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Color Picker</label>
+                        <input type="color" class="h-10 w-full rounded-lg">
+                    </div>
+
+                    <!-- Range Slider -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Range Slider</label>
+                        <input type="range" class="w-full" min="0" max="100" value="50">
+                    </div>
+
+                    <!-- Multi-select -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Multi-select</label>
+                        <select multiple class="muidev-input h-32">
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                            <option>Option 3</option>
+                            <option>Option 4</option>
+                        </select>
+                    </div>
+
+                    <!-- Search with Autocomplete -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Search with Autocomplete</label>
+                        <div class="relative">
+                            <input type="search" class="muidev-input pr-10" placeholder="Search...">
+                            <i class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Display Variants -->
+            <div class="muidev-card p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Data Display Variants</h3>
+                
+                <!-- Timeline -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-medium mb-3">Timeline</h4>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="flex flex-col items-center">
+                                <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+                                <div class="w-0.5 h-full bg-purple-200"></div>
+                            </div>
+                            <div>
+                                <h5 class="font-medium">Event 1</h5>
+                                <p class="text-sm text-gray-600">Description of event 1</p>
+                                <span class="text-xs text-gray-500">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex flex-col items-center">
+                                <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+                                <div class="w-0.5 h-full bg-purple-200"></div>
+                            </div>
+                            <div>
+                                <h5 class="font-medium">Event 2</h5>
+                                <p class="text-sm text-gray-600">Description of event 2</p>
+                                <span class="text-xs text-gray-500">1 day ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tree View -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-medium mb-3">Tree View</h4>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-chevron-right"></i>
+                            <i class="fas fa-folder text-yellow-500"></i>
+                            <span>Root Folder</span>
+                        </div>
+                        <div class="ml-6 space-y-2">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-chevron-down"></i>
+                                <i class="fas fa-folder-open text-yellow-500"></i>
+                                <span>Subfolder</span>
+                            </div>
+                            <div class="ml-6 space-y-2">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-file text-gray-500"></i>
+                                    <span>File 1</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-file text-gray-500"></i>
+                                    <span>File 2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to Get Started?</h2>
+            <p class="text-xl mb-8 opacity-90">Join thousands of developers building amazing UIs</p>
+            <button class="muidev-button" data-variant="light" data-ripple="true">
+                <i class="fas fa-rocket mr-2"></i>Start Building
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize MuiDev components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize buttons with ripple effect
+            document.querySelectorAll('.muidev-button[data-ripple="true"]').forEach(button => {
+                button.addEventListener('click', createRipple);
+            });
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.querySelector('.muidev-navbar .md\\:hidden button');
+            const navItems = document.querySelector('.muidev-navbar .nav-items');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                navItems.classList.toggle('show');
+                const icon = mobileMenuButton.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            // Initialize removable badges
+            document.querySelectorAll('.muidev-badge[data-removable="true"]').forEach(badge => {
+                badge.addEventListener('click', () => {
+                    badge.remove();
+                });
+            });
+
+            // Initialize tabs
+            const tabButtons = document.querySelectorAll('.muidev-tabs button');
+            tabButtons.forEach((button, index) => {
+                if (index === 0) button.classList.add('active');
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                });
+            });
+
+            // Ripple effect function
+            function createRipple(event) {
+                const button = event.currentTarget;
+                const ripple = document.createElement('span');
+                const rect = button.getBoundingClientRect();
+                
+                const diameter = Math.max(button.clientWidth, button.clientHeight);
+                const radius = diameter / 2;
+                
+                ripple.style.width = ripple.style.height = `${diameter}px`;
+                ripple.style.left = `${event.clientX - rect.left - radius}px`;
+                ripple.style.top = `${event.clientY - rect.top - radius}px`;
+                ripple.className = 'ripple';
+                
+                const existingRipple = button.querySelector('.ripple');
+                if (existingRipple) {
+                    existingRipple.remove();
+                }
+                
+                button.appendChild(ripple);
+                
+                ripple.addEventListener('animationend', () => {
+                    ripple.remove();
+                });
+            }
+
+            // Initialize file upload
+            const fileUpload = document.querySelector('.muidev-file-upload');
+            const fileInput = fileUpload.querySelector('input[type="file"]');
+            const filePreview = fileUpload.querySelector('.file-preview');
+
+            fileUpload.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                fileUpload.classList.add('dragging');
+            });
+
+            fileUpload.addEventListener('dragleave', () => {
+                fileUpload.classList.remove('dragging');
+            });
+
+            fileUpload.addEventListener('drop', (e) => {
+                e.preventDefault();
+                fileUpload.classList.remove('dragging');
+                handleFiles(e.dataTransfer.files);
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+
+            function handleFiles(files) {
+                if (files.length === 0) return;
+                
+                filePreview.innerHTML = '';
+                filePreview.classList.remove('hidden');
+                
+                Array.from(files).forEach(file => {
+                    const fileItem = document.createElement('div');
+                    fileItem.className = 'file-item';
+                    fileItem.innerHTML = `
+                        <i class="fas fa-file file-icon"></i>
+                        <span class="file-name">${file.name}</span>
+                        <button class="remove-file">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    
+                    fileItem.querySelector('.remove-file').addEventListener('click', () => {
+                        fileItem.remove();
+                        if (filePreview.children.length === 0) {
+                            filePreview.classList.add('hidden');
+                        }
+                    });
+                    
+                    filePreview.appendChild(fileItem);
+                });
+            }
+
+            // Toast functionality
+            function showToast(type) {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = `
+                    max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto
+                    flex items-center justify-between p-4 border-l-4
+                    ${type === 'success' ? 'border-green-500' : 'border-red-500'}
+                    transform transition-all duration-300 opacity-0 translate-x-full
+                `;
+                
+                toast.innerHTML = `
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            ${type === 'success' 
+                                ? '<i class="fas fa-check-circle text-green-500 text-lg"></i>'
+                                : '<i class="fas fa-times-circle text-red-500 text-lg"></i>'
+                            }
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-900">
+                                ${type === 'success' ? 'Successfully saved!' : 'Error occurred!'}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ml-4 flex-shrink-0 flex">
+                        <button class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(toast);
+                requestAnimationFrame(() => {
+                    toast.classList.remove('opacity-0', 'translate-x-full');
+                });
+                
+                const closeButton = toast.querySelector('button');
+                closeButton.addEventListener('click', () => {
+                    toast.classList.add('opacity-0', 'translate-x-full');
+                    setTimeout(() => toast.remove(), 300);
+                });
+                
+                setTimeout(() => {
+                    if (toast.parentElement) {
+                        toast.classList.add('opacity-0', 'translate-x-full');
+                        setTimeout(() => toast.remove(), 300);
+                    }
+                }, 5000);
+            }
+
+            // Initialize accordion
+            document.querySelectorAll('.muidev-card .border.border-gray-200.rounded-lg').forEach(accordion => {
+                const button = accordion.querySelector('button');
+                const content = accordion.querySelector('div[class*="border-t"]');
+                const icon = button.querySelector('i');
+
+                button.addEventListener('click', () => {
+                    content.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+
+            // Initialize removable tags
+            document.querySelectorAll('.muidev-card .flex.flex-wrap.gap-2 button').forEach(button => {
+                button.addEventListener('click', () => {
+                    button.closest('span').remove();
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
